@@ -1,4 +1,4 @@
 package com.greenpaperuj.wuziqi.pojo;
 
-public class user {
+public class Step {
 }
