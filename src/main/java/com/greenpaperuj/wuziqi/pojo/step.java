@@ -1,4 +1,4 @@
 package com.greenpaperuj.wuziqi.pojo;
 
-public class step {
+public class Step {
 }
