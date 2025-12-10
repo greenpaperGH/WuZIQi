@@ -10,13 +10,13 @@ import java.util.List;
 
 @Configuration
 public class WebConfig implements WebMvcConfigurer {
-    private final static List<String> loginAndSignup = List.of("/login/**", "/signup/**");
+    private final static List<String> loginAndSignup = List.of("/wuziqi/login/**", "/wuziqi/signup/**");
 
     @Autowired
     private LoginCheckInterceptor loginCheckInterceptor;
 
     @Override
     public void addInterceptors (InterceptorRegistry registry) {
-        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/**").excludePathPatterns(loginAndSignup);
+        registry.addInterceptor(loginCheckInterceptor).addPathPatterns("/wuziqi/**").excludePathPatterns(loginAndSignup);
     }
 }

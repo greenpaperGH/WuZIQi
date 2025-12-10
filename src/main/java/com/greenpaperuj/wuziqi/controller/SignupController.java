@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/signup")
+@RequestMapping("/wuziqi/signup")
 public class SignupController {
     @Autowired
     UserService userService;

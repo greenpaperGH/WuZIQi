@@ -15,7 +15,7 @@ import java.util.Map;
 
 @Slf4j
 @RestController
-@RequestMapping("/login")
+@RequestMapping("/wuziqi/login")
 public class LoginController {
     @Autowired
     UserService userService;

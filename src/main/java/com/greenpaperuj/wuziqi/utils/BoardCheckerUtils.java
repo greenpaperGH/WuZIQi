@@ -17,7 +17,7 @@ public class BoardCheckerUtils {
     }
 
     public static Boolean winCheck(Step step, Room room, byte chess) {
-        //chess代表下棋者的棋是哪个数字，规定1为玩家一，-1为玩家二
+        //chess代表下棋者的棋是哪个数字，规定-1为玩家一，1为玩家二
         byte row = step.getRow();
         byte column = step.getColumn();
         Byte[][] checkerboard = room.getCheckerboard();

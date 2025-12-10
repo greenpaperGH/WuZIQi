@@ -32,13 +32,4 @@ public class JwtUtils {
                 .parseSignedClaims(token)
                 .getPayload();
     }
-
-    public static boolean validateToken(String token) {
-        try {
-            parseToken(token);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
 }
