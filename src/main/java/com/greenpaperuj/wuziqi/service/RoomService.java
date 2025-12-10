@@ -9,7 +9,9 @@ public interface RoomService {
 
     void create(RoomWithString roomWithString);
 
-    RoomWithString selectedById (int id);
-
     void playerJoin(int position, int playerId, int roomId);
+
+    RoomWithString selectedById (Integer id);
+
+    void triggerGameStart(Integer roomId);
 }

@@ -35,20 +35,28 @@ public class RoomController {
         return Result.success(roomList);
     }
 
-    @PostMapping
-    public Result create(@RequestBody Room room) {
+    @PostMapping("/create")
+    public Result create(@RequestHeader("token") String jwtToken) {
         log.info("创建房间.");
-        RoomWithString roomWithString = RoomUtils.toRoomWithString(new Room(room.getPlayerOneId(), room.getPlayerTwoId()));
+
+        Integer playerOneId = JwtUtils.parseToken(jwtToken).get("id", Integer.class);
+        Room room = new Room(playerOneId);
+        RoomWithString roomWithString = RoomUtils.toRoomWithString(room);
+
         roomService.create(roomWithString);
 
-        return Result.success();
+        return Result.success(room);
     }
 
     @PutMapping("/{id}")
     public Result playerJoin(@PathVariable Integer id, @RequestHeader("token") String jwtToken) {
         log.info("玩家加入房间.");
-
         RoomWithString roomWithString = roomService.selectedById(id);
+
+        if (roomWithString == null) {
+            return Result.error("Room not found.");
+        }
+
         Integer roomId = roomWithString.getId();
         Claims claims = JwtUtils.parseToken(jwtToken);
         Integer playerId = claims.get("id", Integer.class);
@@ -58,19 +66,20 @@ public class RoomController {
         }
 
         if (roomWithString.getPlayerOneId() != null) {
-            roomService.playerJoin(1, playerId, roomId);
-            return Result.success();
+
+            if (roomWithString.getPlayerOneId().equals(playerId)) {
+                return Result.error("You are already in this room.");
+            }
+
+            roomService.playerJoin(2, playerId, roomId);
+
+            roomService.triggerGameStart(roomId);
+
+            return Result.success("Game Started!");
         }
 
-        roomService.playerJoin(2, playerId, roomId);
+        roomService.playerJoin(1, playerId, roomId);
         return Result.success();
-    }
-
-    @GetMapping("/{id}")
-    public Result selectRoomById(@PathVariable Integer id) {
-        log.info("使用id查询房间.");
-
-        return Result.success(RoomUtils.toRoom(roomService.selectedById(id)));
     }
 
 }

@@ -12,19 +12,26 @@ import java.util.concurrent.atomic.AtomicInteger;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Room {
-    private static final AtomicInteger idCounter = new AtomicInteger(1);
-
     private Integer id;
     private Integer playerOneId;
     private Integer playerTwoId;
     private Byte[][] checkerboard;//0当空位，-1为玩家一下的棋，1为玩家2下的棋
     private StatusEnum status;
+    private Integer nextPlayerId;
+    private Integer winnerId;
 
     public Room(Integer playerOneId, Integer playerTwoId) {
-        this.id = idCounter.getAndIncrement();
         this.playerOneId = playerOneId;
         this.playerTwoId = playerTwoId;
         this.checkerboard = BoardChangeUtils.newBoard();
         this.status = StatusEnum.WAITING;
+        this.nextPlayerId = playerOneId;
+    }
+
+    public Room(Integer playerOneId) {
+        this.playerOneId = playerOneId;
+        this.checkerboard = BoardChangeUtils.newBoard();
+        this.status = StatusEnum.WAITING;
+        this.nextPlayerId = playerOneId;
     }
 }

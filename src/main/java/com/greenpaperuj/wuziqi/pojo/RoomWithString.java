@@ -14,5 +14,6 @@ public class RoomWithString {
     private Integer playerTwoId;
     private String boardString;
     private StatusEnum status;
-
+    private Integer nextPlayerId;
+    private Integer winnerId;
 }

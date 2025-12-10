@@ -34,11 +34,7 @@ public class BoardCheckerUtils {
         byte slopeTwoCount = (byte) (leftAndDownCount(row, column, chess, checkerboard) +
                 rightAndUpCount(row, column, chess, checkerboard) - 1);
 
-        if (verticalCount >= 5 || crosswiseCount >= 5 || slopeOneCount >= 5 || slopeTwoCount >= 5) {
-            return true;
-        }
-
-        return false;
+        return verticalCount >= 5 || crosswiseCount >= 5 || slopeOneCount >= 5 || slopeTwoCount >= 5;
     }
 
     private static byte upVerticalCount(byte row, byte column, byte chess,Byte[][] checkerboard) {

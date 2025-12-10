@@ -17,33 +17,7 @@ class WuZiQiApplicationTests {
 
     @Test
     void contextLoads() {
-        Step step = new Step(1, (byte) 8, (byte) 8);
 
-        Room roomOne = new Room(100, 101);
-        Byte[][] boardOne = BoardChangeUtils.newBoard();
-        boardOne[7][7] = 1;
-        boardOne[6][6] = 1;
-        boardOne[5][5] = 1;
-        boardOne[9][9] = 1;
-        boardOne[8][8] = 1;
-        roomOne.setCheckerboard(boardOne);
-
-        String boardStringOne = BoardChangeUtils.boardToString(boardOne);
-        System.out.println(boardStringOne);
-
-        Byte[][] board = BoardChangeUtils.stringToBoard(boardStringOne);
-
-        System.out.println(BoardCheckerUtils.winCheck(step, roomOne, (byte) 1));
-    }
-
-    @Test
-    void test1() {
-        Room room = new Room(100, 101);
-        RoomWithString roomWithString = RoomUtils.toRoomWithString(room);
-
-        RoomService roomService = new RoomServiceImpl();
-        
-        roomService.create(roomWithString);
     }
 
 }

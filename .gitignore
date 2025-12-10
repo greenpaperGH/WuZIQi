@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+merge_project.py
+project_code_context.txt
