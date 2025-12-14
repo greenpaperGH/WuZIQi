@@ -2,6 +2,7 @@ package com.greenpaperuj.wuziqi.service.impl;
 
 import com.greenpaperuj.wuziqi.enums.StatusEnum;
 import com.greenpaperuj.wuziqi.mapper.RoomMapper;
+import com.greenpaperuj.wuziqi.mapper.UserMapper;
 import com.greenpaperuj.wuziqi.pojo.Result;
 import com.greenpaperuj.wuziqi.pojo.Room;
 import com.greenpaperuj.wuziqi.pojo.RoomWithString;
@@ -17,6 +18,9 @@ import org.springframework.stereotype.Service;
 public class GameServiceImpl implements GameService {
     @Autowired
     RoomMapper roomMapper;
+
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public RoomWithString selectedById(Integer id) {
@@ -67,6 +71,9 @@ public class GameServiceImpl implements GameService {
         roomMapper.updateGameStatus(updateData);
 
         if (isWin) {
+            Integer userId = step.getChessPlayerID();
+            Integer updatedScore = userMapper.selectById(userId).getScore() + 1;
+            userMapper.updateScore(updatedScore, userId);
             return Result.success("Win!");
         }
         return Result.success("Successfully placed chess.");

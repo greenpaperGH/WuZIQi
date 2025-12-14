@@ -15,13 +15,12 @@ public class BoardChangeUtils {
         int index = (step.getRow() - 1) * 15 +(step.getColumn() - 1);
         StringBuilder stringBuilder = new StringBuilder(boardString);
 
-        stringBuilder.delete(index, index - 1);
         char chess = switch (role) {
             case -1 -> 'b';
             case 1 -> 'c';
             default -> 'a';
         };
-        stringBuilder.insert(index, chess);
+        stringBuilder.setCharAt(index, chess);
 
         return stringBuilder.toString();
     }
